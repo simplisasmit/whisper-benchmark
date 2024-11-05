@@ -1,0 +1,7 @@
+Metric,Value (seconds)
+GPU,NVIDIA A10G
+p25,10.78
+p50,11.17
+p90,15.09
+p99,19.88
+avg,12.15

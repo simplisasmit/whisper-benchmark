@@ -33,8 +33,8 @@ def calculate_metrics(latencies):
     avg = np.mean(latencies_array)
     return p25, p50, p90, p99, avg
 
-def save_results_to_csv(gpu_name, p25, p50, p90, p99, avg):
-    filename = f"whisper_latency_{gpu_name.replace(' ', '_')}.csv"
+def save_results_to_csv(gpu_name, p25, p50, p90, p99, avg, duration):
+    filename = f"whisper_latency_{gpu_name.replace(' ', '_')}_{duration}_mins.csv"
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Metric', 'Value (seconds)'])
@@ -46,19 +46,19 @@ def save_results_to_csv(gpu_name, p25, p50, p90, p99, avg):
         writer.writerow(['avg', f'{avg:.2f}'])
     print(f"Results saved to {filename}")
 
-def main():
-    gpu_name = get_gpu_name()
-    print(f"Using device: {gpu_name}")
+# def main():
+#     gpu_name = get_gpu_name()
+#     print(f"Using device: {gpu_name}")
 
-    audio_files = []
+#     audio_files = []
 
-    model = WhisperModel("whisper-large-v3-turbo", device="cuda", compute_type="float16")
+#     model = WhisperModel("whisper-large-v3-turbo", device="cuda", compute_type="float16")
 
-    latencies = process_audio_files(audio_files, model)
+#     latencies = process_audio_files(audio_files, model)
 
-    p25, p50, p90, p99, avg = calculate_metrics(latencies)
+#     p25, p50, p90, p99, avg = calculate_metrics(latencies)
 
-    save_results_to_csv(gpu_name, p25, p50, p90, p99, avg)
+#     save_results_to_csv(gpu_name, p25, p50, p90, p99, avg)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

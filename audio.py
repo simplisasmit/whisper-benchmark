@@ -3,21 +3,21 @@ from pydub import AudioSegment
 import random
 
 
-def create_random_audio(input_file, output_dir, num_files, duration_range, seed):
+def create_random_audio(input_file, output_dir, num_files, duration, seed):
     random.seed(seed)
 
     audio = AudioSegment.from_file(input_file)
 
     os.makedirs(output_dir, exist_ok=True)
+    
+    duration_ms = duration*1000.0
 
     for i in range(num_files):
-        duration = random.uniform(duration_range[0], duration_range[1])
-        duration_ms = int(duration * 1000)
+        start_pos_ms = random.uniform(0, len(audio)-duration_ms)
         
-        max_start = len(audio) - duration_ms
-        start_pos = random.randint(0, max_start)
+        chunk = audio[start_pos_ms:start_pos_ms + duration_ms]
         
-        chunk = audio[start_pos:start_pos + duration_ms]
+        chunk = chunk.set_frame_rate(16000)
         
         output_file = os.path.join(output_dir, f"random_chunk_{i+1}.wav")
         
