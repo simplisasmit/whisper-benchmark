@@ -18,17 +18,17 @@ def process(model,audio_files,duration):
 model = WhisperModel("whisper-large-v3-turbo", device="cuda", compute_type="float16",)
 
 
-duration = 1
-dir = f"{duration}_min_random"
-audio_files = [os.path.join(dir,item) for item in os.listdir(dir) if item.endswith('.wav')]
+# duration = 1
+# dir = f"{duration}_min_random"
+# audio_files = [os.path.join(dir,item) for item in os.listdir(dir) if item.endswith('.wav')]
 
-process(model,audio_files,duration)
+# process(model,audio_files,duration)
 
-duration = 5
-dir = f"{duration}_min_random"
-audio_files = [os.path.join(dir,item) for item in os.listdir(dir) if item.endswith('.wav')]
+# duration = 5
+# dir = f"{duration}_min_random"
+# audio_files = [os.path.join(dir,item) for item in os.listdir(dir) if item.endswith('.wav')]
 
-process(model,audio_files,duration)
+# process(model,audio_files,duration)
 
 duration = 10
 dir = f"{duration}_min_random"
