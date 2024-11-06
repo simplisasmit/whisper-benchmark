@@ -1,0 +1,7 @@
+Metric,Value (seconds)
+GPU,NVIDIA L4
+p25,0.96
+p50,0.99
+p90,1.04
+p99,1.09
+avg,1.00

@@ -2,7 +2,7 @@ import os
 import time
 import csv
 import numpy as np
-from faster_whisper import WhisperModel
+from faster_whisper import BatchedInferencePipeline, WhisperModel
 import torch
 
 def get_gpu_name():
@@ -12,10 +12,11 @@ def get_gpu_name():
         return "CPU"
 
 def process_audio_files(audio_files, model):
+    batched_model = BatchedInferencePipeline(model=model)
     latencies = []
     for audio_file in audio_files:
         start_time = time.time()
-        segments, _ = model.transcribe(audio_file)
+        segments, _ = batched_model.transcribe(audio_file,batch_size=16)
 
         list(segments)
         end_time = time.time()
